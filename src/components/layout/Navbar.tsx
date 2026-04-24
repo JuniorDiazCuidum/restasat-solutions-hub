@@ -24,7 +24,7 @@ export const Navbar = () => {
           <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
             <span className="text-accent font-bold text-sm">R</span>
           </div>
-          <span className="font-semibold tracking-tight text-lg">Restasat</span>
+          <span className="font-semibold tracking-tight text-lg">resta<span className="text-accent">SAT</span></span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">

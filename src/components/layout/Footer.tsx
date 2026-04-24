@@ -10,7 +10,7 @@ export const Footer = () => {
             <div className="h-8 w-8 rounded-md bg-accent flex items-center justify-center">
               <span className="text-primary font-bold text-sm">R</span>
             </div>
-            <span className="font-semibold text-lg">Restasat</span>
+            <span className="font-semibold text-lg">resta<span className="text-accent">SAT</span></span>
           </div>
           <p className="text-sm text-primary-foreground/70 leading-relaxed">
             Alquiler de maquinaria de hostelería con mantenimiento integral.
