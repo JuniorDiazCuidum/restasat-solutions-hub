@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/logo.webp";
 
 const links = [
   { to: "/", label: "Inicio" },
@@ -20,10 +21,14 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
       <div className="container-x flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center">
-            <span className="text-accent font-bold text-sm">R</span>
-          </div>
+        <Link to="/" className="flex items-center gap-2.5">
+          <img
+            src={logo}
+            alt="restaSAT"
+            width={36}
+            height={36}
+            className="h-9 w-9 object-contain"
+          />
           <span className="font-semibold tracking-tight text-lg">resta<span className="text-accent">SAT</span></span>
         </Link>
 

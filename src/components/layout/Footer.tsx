@@ -1,14 +1,21 @@
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin } from "lucide-react";
+import logo from "@/assets/logo.webp";
 
 export const Footer = () => {
   return (
     <footer className="bg-primary text-primary-foreground mt-24">
       <div className="container-x py-16 grid gap-10 md:grid-cols-4">
         <div>
-          <div className="flex items-center gap-2 mb-4">
-            <div className="h-8 w-8 rounded-md bg-accent flex items-center justify-center">
-              <span className="text-primary font-bold text-sm">R</span>
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="h-10 w-10 rounded-md bg-primary-foreground/10 p-1 flex items-center justify-center">
+              <img
+                src={logo}
+                alt="restaSAT"
+                width={40}
+                height={40}
+                className="h-full w-full object-contain"
+              />
             </div>
             <span className="font-semibold text-lg">resta<span className="text-accent">SAT</span></span>
           </div>
