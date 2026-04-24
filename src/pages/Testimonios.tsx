@@ -2,7 +2,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Newsletter } from "@/components/Newsletter";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { Star, ArrowRight, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import avatarMaria from "@/assets/avatar-maria.jpg";
 import avatarJavier from "@/assets/avatar-javier.jpg";
@@ -56,122 +56,134 @@ const items = [
   },
 ];
 
-const stats = [
-  { v: "4.9", l: "Valoración" },
-  { v: "800+", l: "Reseñas" },
-  { v: "<4h", l: "Respuesta" },
-  { v: "97%", l: "Recomiendan" },
-];
-
 const Testimonios = () => {
   const featured = items[0];
   const rest = items.slice(1);
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* HERO — minimal, editorial */}
-      <section className="border-b border-border">
-        <div className="container-x pt-20 pb-16 md:pt-28 md:pb-20">
-          <div className="grid md:grid-cols-12 gap-10 items-end">
-            <div className="md:col-span-8">
-              <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground">
-                — Testimonios
-              </span>
-              <h1 className="text-5xl md:text-7xl font-semibold mt-6 leading-[1.05] tracking-tight text-balance">
-                La voz de quienes
-                <br />
-                <span className="text-muted-foreground">cocinan con nosotros.</span>
-              </h1>
-            </div>
-            <div className="md:col-span-4">
-              <p className="text-base text-muted-foreground leading-relaxed max-w-sm">
-                Más de 800 hosteleros confían en Restasat para equipar sus cocinas. Estas son
-                algunas de sus historias.
-              </p>
-            </div>
-          </div>
+      {/* HERO — coherente con Nosotros */}
+      <section className="bg-surface border-b border-border">
+        <div className="container-x py-16">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+            Testimonios
+          </span>
+          <h1 className="text-4xl md:text-5xl font-bold mt-2 mb-4 text-balance">
+            La voz de quienes cocinan con nosotros
+          </h1>
+          <p className="text-muted-foreground max-w-2xl text-lg">
+            Más de 800 hosteleros confían en Restasat para equipar sus cocinas. Estas son
+            algunas de sus historias.
+          </p>
 
-          {/* Stats — tipo data row, sin cards */}
-          <div className="grid grid-cols-2 md:grid-cols-4 mt-20 border-t border-border">
-            {stats.map((s, i) => (
-              <div
-                key={s.l}
-                className={`py-8 ${i !== 0 ? "md:border-l border-border" : ""} ${i === 2 ? "border-l md:border-l" : ""}`}
-              >
-                <div className="text-4xl md:text-5xl font-semibold tracking-tight tabular-nums">
-                  {s.v}
-                </div>
-                <div className="text-xs uppercase tracking-wider text-muted-foreground mt-2">
-                  {s.l}
-                </div>
+          {/* Stats inline */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10 max-w-3xl">
+            {[
+              { v: "4.9", l: "Valoración media" },
+              { v: "+800", l: "Reseñas" },
+              { v: "<4h", l: "Respuesta técnica" },
+              { v: "97%", l: "Recomiendan" },
+            ].map((s) => (
+              <div key={s.l} className="bg-card border border-border rounded-xl p-4">
+                <div className="text-2xl font-bold text-primary">{s.v}</div>
+                <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* DESTACADO — quote editorial gigante */}
-      <section className="container-x py-24 md:py-32">
-        <div className="max-w-5xl mx-auto">
-          <span className="text-[11px] font-medium uppercase tracking-[0.25em] text-muted-foreground">
-            01 — Caso destacado
-          </span>
-          <blockquote className="mt-8">
-            <p className="text-3xl md:text-5xl font-medium leading-[1.2] tracking-tight text-balance">
-              {featured.text}
-            </p>
-          </blockquote>
-          <div className="flex items-center gap-4 mt-12">
+      {/* DESTACADO — minimal editorial card */}
+      <section className="container-x py-20">
+        <article className="relative bg-card border border-border rounded-3xl p-8 md:p-14 overflow-hidden">
+          {/* Accent corner mark */}
+          <div className="absolute top-0 left-0 h-1 w-24 bg-accent rounded-br-full" />
+
+          <div className="flex items-center justify-between mb-10">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+              Caso destacado
+            </span>
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="h-4 w-4 fill-gold text-gold" />
+              ))}
+            </div>
+          </div>
+
+          <p className="text-2xl md:text-4xl font-semibold leading-[1.25] tracking-tight text-balance max-w-4xl">
+            <span className="text-accent">"</span>
+            {featured.text}
+            <span className="text-accent">"</span>
+          </p>
+
+          <div className="flex items-center gap-4 mt-12 pt-8 border-t border-border">
             <img
               src={featured.avatar}
               alt={featured.name}
-              className="h-12 w-12 rounded-full object-cover grayscale"
+              className="h-14 w-14 rounded-full object-cover"
               loading="lazy"
             />
-            <div className="text-sm">
-              <div className="font-medium">{featured.name}</div>
-              <div className="text-muted-foreground">
-                {featured.role}, {featured.company}
+            <div>
+              <div className="font-semibold">{featured.name}</div>
+              <div className="text-sm text-muted-foreground">
+                {featured.role} · {featured.company}
               </div>
             </div>
           </div>
-        </div>
+        </article>
       </section>
 
-      {/* GRID — minimal, line-divided */}
-      <section className="border-t border-border flex-1">
-        <div className="container-x py-20">
-          <div className="flex items-end justify-between mb-16 gap-6 flex-wrap">
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
-              Más opiniones
-            </h2>
-            <span className="text-xs uppercase tracking-wider text-muted-foreground tabular-nums">
+      {/* GRID — minimal cards */}
+      <section className="bg-surface py-20 flex-1 border-t border-border">
+        <div className="container-x">
+          <div className="flex items-end justify-between mb-12 gap-6 flex-wrap">
+            <div>
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                Más reseñas
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-3 tracking-tight">
+                Opiniones recientes
+              </h2>
+            </div>
+            <span className="text-sm text-muted-foreground tabular-nums">
               {String(rest.length).padStart(2, "0")} verificadas
             </span>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             {rest.map((t, idx) => (
-              <article key={t.name} className="group">
-                <span className="text-xs font-medium text-muted-foreground tabular-nums">
-                  {String(idx + 2).padStart(2, "0")}
-                </span>
-                <p className="text-foreground leading-relaxed mt-4 text-[1.05rem]">
-                  &ldquo;{t.text}&rdquo;
+              <article
+                key={t.name}
+                className="group relative bg-card border border-border rounded-2xl p-7 flex flex-col hover:border-foreground/30 transition-colors"
+              >
+                <div className="flex items-center justify-between mb-6">
+                  <span className="text-xs font-medium text-muted-foreground tabular-nums">
+                    {String(idx + 2).padStart(2, "0")}
+                  </span>
+                  <div className="flex gap-0.5">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-3 w-3 fill-gold text-gold" />
+                    ))}
+                  </div>
+                </div>
+
+                <p className="text-foreground/90 leading-relaxed flex-1 text-[0.95rem]">
+                  {t.text}
                 </p>
+
                 <div className="flex items-center gap-3 mt-8 pt-6 border-t border-border">
                   <img
                     src={t.avatar}
                     alt={t.name}
-                    className="h-9 w-9 rounded-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500"
+                    className="h-10 w-10 rounded-full object-cover"
                     loading="lazy"
                   />
-                  <div className="min-w-0 flex-1 text-sm">
-                    <div className="font-medium truncate">{t.name}</div>
-                    <div className="text-muted-foreground text-xs truncate">
-                      {t.role}, {t.company}
+                  <div className="min-w-0 flex-1">
+                    <div className="font-semibold text-sm truncate">{t.name}</div>
+                    <div className="text-xs text-muted-foreground truncate">
+                      {t.role} · {t.company}
                     </div>
                   </div>
                 </div>
@@ -181,19 +193,26 @@ const Testimonios = () => {
         </div>
       </section>
 
-      {/* CTA — minimal line */}
-      <section className="border-t border-border">
-        <div className="container-x py-20 md:py-24">
-          <div className="grid md:grid-cols-[1fr_auto] gap-8 items-center">
-            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-balance max-w-2xl">
+      {/* CTA */}
+      <section className="container-x py-16">
+        <div className="bg-primary text-primary-foreground rounded-2xl p-10 md:p-14 grid md:grid-cols-[1fr_auto] gap-6 items-center">
+          <div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-2 text-balance">
               ¿Quieres ser el próximo en confiar en nosotros?
             </h2>
-            <Button asChild size="lg" variant="default" className="rounded-full px-7">
-              <Link to="/contacto#presupuesto">
-                Pedir presupuesto <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
+            <p className="text-primary-foreground/70">
+              Cuéntanos tu proyecto y te haremos un presupuesto sin compromiso.
+            </p>
           </div>
+          <Button
+            asChild
+            size="lg"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground"
+          >
+            <Link to="/contacto#presupuesto">
+              Pedir presupuesto <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
       </section>
 
