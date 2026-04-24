@@ -8,15 +8,13 @@ export const Footer = () => {
       <div className="container-x py-16 grid gap-10 md:grid-cols-4">
         <div>
           <div className="flex items-center mb-4">
-            <div className="bg-primary-foreground/10 rounded-lg p-2">
-              <img
-                src={logo}
-                alt="restaSAT"
-                width={56}
-                height={56}
-                className="h-14 w-auto object-contain"
-              />
-            </div>
+            <img
+              src={logo}
+              alt="restaSAT"
+              width={56}
+              height={56}
+              className="h-14 w-auto object-contain brightness-0 invert"
+            />
           </div>
           <p className="text-sm text-primary-foreground/70 leading-relaxed">
             Alquiler de maquinaria de hostelería con mantenimiento integral.
