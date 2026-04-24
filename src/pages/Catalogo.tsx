@@ -188,38 +188,7 @@ const Catalogo = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* Category chips bar (above hero image) */}
-      <div className="border-b border-border bg-background">
-        <div className="container-x py-5">
-          <div className="flex flex-wrap justify-center gap-2">
-            <Link
-              to="/catalogo"
-              className={cn(
-                "px-5 py-2.5 rounded-md text-sm font-medium transition-colors border",
-                !activeSlug
-                  ? "bg-primary text-primary-foreground border-primary"
-                  : "bg-card border-border hover:border-accent",
-              )}
-            >
-              Todos
-            </Link>
-            {categories.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/catalogo/${c.slug}`}
-                className={cn(
-                  "px-5 py-2.5 rounded-md text-sm font-medium transition-colors border",
-                  activeSlug === c.slug
-                    ? "bg-primary text-primary-foreground border-primary"
-                    : "bg-card border-border hover:border-accent",
-                )}
-              >
-                {c.name}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </div>
+
 
       {/* Hero with image */}
       <section className="relative border-b border-border overflow-hidden">
