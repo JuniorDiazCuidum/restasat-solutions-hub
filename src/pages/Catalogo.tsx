@@ -200,7 +200,7 @@ const Catalogo = () => {
             height={1080}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/40 to-background/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/80 to-background/90" />
         </div>
 
         <div className="container-x relative py-16 md:py-24">
@@ -209,10 +209,10 @@ const Catalogo = () => {
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">
               Catálogo
             </span>
-            <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-4 text-balance">
+            <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-4 text-balance text-foreground">
               Maquinaria profesional para hostelería
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-foreground/80 text-lg">
               Equipos seleccionados para cocinas exigentes. Filtra por categoría, fabricante o precio.
             </p>
 

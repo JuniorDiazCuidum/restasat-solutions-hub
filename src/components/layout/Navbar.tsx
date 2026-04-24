@@ -21,15 +21,14 @@ export const Navbar = () => {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border">
       <div className="container-x flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center">
           <img
             src={logo}
             alt="restaSAT"
-            width={36}
-            height={36}
-            className="h-9 w-9 object-contain"
+            width={48}
+            height={48}
+            className="h-11 w-auto object-contain"
           />
-          <span className="font-semibold tracking-tight text-lg">resta<span className="text-accent">SAT</span></span>
         </Link>
 
         <nav className="hidden lg:flex items-center gap-1">
