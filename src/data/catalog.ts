@@ -31,12 +31,24 @@ export type Product = {
   description: string;
   price: number; // EUR / mes
   category: string;
+  brand: string;
   image: string;
   hasOffer?: boolean;
   originalPrice?: number;
   longDescription?: string;
   specs?: { label: string; value: string }[];
 };
+
+export const brands = [
+  "Rational",
+  "Fagor",
+  "Repagas",
+  "Infrico",
+  "Coreco",
+  "Sammic",
+  "Mainho",
+  "Movilfrit",
+] as const;
 
 export type Category = {
   slug: string;
