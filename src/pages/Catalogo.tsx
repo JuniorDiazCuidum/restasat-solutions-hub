@@ -304,6 +304,35 @@ const Catalogo = () => {
       </section>
 
       <main className="container-x py-16 flex-1">
+        {/* Category chips above the section titles */}
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          <Link
+            to="/catalogo"
+            className={cn(
+              "px-5 py-2.5 rounded-md text-sm font-medium transition-colors border",
+              !activeSlug
+                ? "bg-primary text-primary-foreground border-primary"
+                : "bg-card border-border hover:border-accent",
+            )}
+          >
+            Todos
+          </Link>
+          {categories.map((c) => (
+            <Link
+              key={c.slug}
+              to={`/catalogo/${c.slug}`}
+              className={cn(
+                "px-5 py-2.5 rounded-md text-sm font-medium transition-colors border",
+                activeSlug === c.slug
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-card border-border hover:border-accent",
+              )}
+            >
+              {c.name}
+            </Link>
+          ))}
+        </div>
+
         {visibleProducts.length === 0 ? (
           <div className="text-center py-20 max-w-md mx-auto">
             <div className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-surface mb-5">
