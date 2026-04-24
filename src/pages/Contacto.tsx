@@ -150,7 +150,7 @@ const Contacto = () => {
         <div className="container-x relative py-20 md:py-28">
           <div className="max-w-3xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm mb-6">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
               <span className="text-xs font-medium tracking-wide">Disponibles ahora · Respuesta en 24h</span>
             </div>
             <h1 className="text-4xl md:text-6xl font-bold mb-5 text-balance leading-[1.05]">
