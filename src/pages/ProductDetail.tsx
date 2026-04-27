@@ -13,6 +13,14 @@ import {
   Download,
   Sparkles,
   Tag,
+  Zap,
+  Ruler,
+  Settings2,
+  Snowflake,
+  Wind,
+  Droplets,
+  Calendar,
+  Printer,
 } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -101,78 +109,192 @@ const ProductDetail = () => {
       </section>
 
       {/* FICHA TÉCNICA */}
-      {product.specSheet && product.specSheet.length > 0 && (
-        <section className="bg-surface border-y border-border">
-          <div className="container-x py-16">
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-              <div>
-                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
-                  <FileText className="h-3.5 w-3.5" />
-                  Ficha técnica
-                </span>
-                <h2 className="text-3xl font-bold mt-2">Especificaciones</h2>
-                <p className="text-muted-foreground text-sm mt-1">
-                  Datos verificados por el fabricante · {product.brand}
-                </p>
-              </div>
-              <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                <Tag className="h-3.5 w-3.5" />
-                Ref. {product.id.toUpperCase()}
-              </div>
-            </div>
+      {product.specSheet && product.specSheet.length > 0 && (() => {
+        // Icon mapping per group title (case-insensitive partial match)
+        const iconForGroup = (title: string) => {
+          const t = title.toLowerCase();
+          if (t.includes("eléctric") || t.includes("electric")) return Zap;
+          if (t.includes("dimens")) return Ruler;
+          if (t.includes("aire")) return Wind;
+          if (t.includes("hidrá") || t.includes("agua")) return Droplets;
+          if (t.includes("frío") || t.includes("frio") || t.includes("refriger")) return Snowflake;
+          if (t.includes("conex") || t.includes("gas")) return Zap;
+          return Settings2;
+        };
 
-            <div className="grid lg:grid-cols-3 gap-6">
-              {product.specSheet.map((group) => (
-                <div
-                  key={group.title}
-                  className="bg-card border border-border rounded-2xl overflow-hidden"
-                >
-                  <div className="bg-primary text-primary-foreground px-5 py-3">
-                    <h3 className="text-sm font-bold uppercase tracking-wider">
-                      {group.title}
-                    </h3>
-                  </div>
-                  <dl className="divide-y divide-border">
-                    {group.items.map((item) => (
-                      <div
-                        key={item.label}
-                        className="flex items-center justify-between gap-4 px-5 py-3"
+        // Build "Highlights": grab up to 4 key specs from the whole sheet
+        const allItems = product.specSheet.flatMap((g) => g.items);
+        const pickKeys = ["Potencia", "Capacidad", "Tensión", "Producción", "Caudal"];
+        const highlights = pickKeys
+          .map((k) => allItems.find((i) => i.label.toLowerCase().includes(k.toLowerCase())))
+          .filter((x): x is { label: string; value: string } => Boolean(x))
+          .slice(0, 4);
+
+        const today = new Date().toLocaleDateString("es-ES", {
+          year: "numeric",
+          month: "long",
+        });
+
+        return (
+          <section className="bg-surface border-y border-border">
+            <div className="container-x py-16 md:py-20">
+              {/* Header documento */}
+              <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
+                <div className="relative bg-primary text-primary-foreground px-6 md:px-10 py-8 overflow-hidden">
+                  <div
+                    className="absolute inset-0 opacity-[0.07] pointer-events-none"
+                    style={{
+                      backgroundImage:
+                        "linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)",
+                      backgroundSize: "32px 32px",
+                    }}
+                  />
+                  <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                      <span className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-accent">
+                        <FileText className="h-3.5 w-3.5" />
+                        Ficha técnica oficial
+                      </span>
+                      <h2 className="text-2xl md:text-4xl font-bold mt-3 leading-tight">
+                        {product.name}
+                      </h2>
+                      <p className="text-primary-foreground/70 text-sm mt-2 max-w-xl">
+                        Especificaciones completas verificadas por el fabricante.
+                        Documento generado para uso comercial e instalación.
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => window.print()}
+                        className="inline-flex items-center gap-2 bg-primary-foreground/10 hover:bg-primary-foreground/20 border border-primary-foreground/20 backdrop-blur-sm text-xs font-medium px-3 py-2 rounded-lg transition-colors"
                       >
-                        <dt className="text-sm text-muted-foreground">{item.label}</dt>
-                        <dd className="text-sm font-semibold text-right">{item.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
+                        <Printer className="h-3.5 w-3.5" />
+                        Imprimir
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              ))}
-            </div>
 
-            {product.documents && product.documents.length > 0 && (
-              <div className="mt-10 grid sm:grid-cols-2 gap-3 max-w-2xl">
-                {product.documents.map((doc) => (
-                  <a
-                    key={doc.label}
-                    href="#"
-                    onClick={(e) => e.preventDefault()}
-                    className="group flex items-center gap-3 bg-card border border-border rounded-xl px-4 py-3 hover:border-accent transition-colors"
-                  >
-                    <div className="h-10 w-10 rounded-lg bg-accent/15 flex items-center justify-center shrink-0">
-                      <FileText className="h-5 w-5 text-accent" />
+                {/* Meta strip */}
+                <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-border border-b border-border bg-card">
+                  {[
+                    { icon: Tag, label: "Referencia", value: product.id.toUpperCase() },
+                    { icon: Sparkles, label: "Marca", value: product.brand },
+                    { icon: ShieldCheck, label: "Garantía", value: "2 años" },
+                    { icon: Calendar, label: "Actualizado", value: today },
+                  ].map((m) => (
+                    <div key={m.label} className="px-5 py-4 flex items-center gap-3">
+                      <div className="h-8 w-8 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
+                        <m.icon className="h-4 w-4 text-accent" />
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium">
+                          {m.label}
+                        </div>
+                        <div className="text-sm font-semibold truncate">{m.value}</div>
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-semibold truncate">{doc.label}</div>
-                      {doc.size && (
-                        <div className="text-xs text-muted-foreground">PDF · {doc.size}</div>
-                      )}
+                  ))}
+                </div>
+
+                {/* Highlights */}
+                {highlights.length > 0 && (
+                  <div className="px-6 md:px-10 py-6 bg-card border-b border-border">
+                    <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-semibold mb-3">
+                      Datos clave
                     </div>
-                    <Download className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
-                  </a>
-                ))}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      {highlights.map((h) => (
+                        <div
+                          key={h.label}
+                          className="bg-surface rounded-xl px-4 py-3 border border-border"
+                        >
+                          <div className="text-xs text-muted-foreground">{h.label}</div>
+                          <div className="text-lg font-bold text-primary mt-0.5 leading-tight">
+                            {h.value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Spec groups */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border">
+                  {product.specSheet.map((group) => {
+                    const Icon = iconForGroup(group.title);
+                    return (
+                      <div key={group.title} className="bg-card flex flex-col">
+                        <div className="flex items-center gap-2.5 px-5 py-3.5 border-b border-border">
+                          <div className="h-7 w-7 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
+                            <Icon className="h-3.5 w-3.5 text-primary" />
+                          </div>
+                          <h3 className="text-xs font-bold uppercase tracking-[0.15em] text-foreground">
+                            {group.title}
+                          </h3>
+                        </div>
+                        <dl className="flex-1">
+                          {group.items.map((item, i) => (
+                            <div
+                              key={item.label}
+                              className={
+                                "flex items-center justify-between gap-4 px-5 py-2.5 text-sm " +
+                                (i % 2 === 1 ? "bg-surface/50" : "")
+                              }
+                            >
+                              <dt className="text-muted-foreground">{item.label}</dt>
+                              <dd className="font-semibold text-right text-foreground tabular-nums">
+                                {item.value}
+                              </dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Documents footer */}
+                {product.documents && product.documents.length > 0 && (
+                  <div className="px-6 md:px-10 py-6 bg-surface/60 border-t border-border">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                      <div>
+                        <div className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-semibold">
+                          Documentación adjunta
+                        </div>
+                        <div className="text-sm text-muted-foreground mt-1">
+                          Descarga la documentación oficial del fabricante
+                        </div>
+                      </div>
+                      <div className="flex flex-wrap gap-2">
+                        {product.documents.map((doc) => (
+                          <a
+                            key={doc.label}
+                            href="#"
+                            onClick={(e) => e.preventDefault()}
+                            className="group inline-flex items-center gap-2.5 bg-card border border-border rounded-lg pl-3 pr-2 py-2 hover:border-accent hover:shadow-sm transition-all"
+                          >
+                            <FileText className="h-4 w-4 text-accent" />
+                            <div className="text-xs">
+                              <div className="font-semibold leading-tight">{doc.label}</div>
+                              {doc.size && (
+                                <div className="text-muted-foreground">PDF · {doc.size}</div>
+                              )}
+                            </div>
+                            <span className="ml-1 h-7 w-7 rounded-md bg-primary text-primary-foreground flex items-center justify-center group-hover:bg-accent transition-colors">
+                              <Download className="h-3.5 w-3.5" />
+                            </span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-            )}
-          </div>
-        </section>
-      )}
+            </div>
+          </section>
+        );
+      })()}
 
       <section className="bg-surface py-12">
         <div className="container-x grid md:grid-cols-3 gap-6">
