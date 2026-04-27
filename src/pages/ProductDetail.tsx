@@ -3,7 +3,17 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { categories, getProduct, getProductsByCategory } from "@/data/catalog";
-import { ArrowLeft, Check, ShieldCheck, Truck, Wrench } from "lucide-react";
+import {
+  ArrowLeft,
+  Check,
+  ShieldCheck,
+  Truck,
+  Wrench,
+  FileText,
+  Download,
+  Sparkles,
+  Tag,
+} from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
 
 const ProductDetail = () => {
