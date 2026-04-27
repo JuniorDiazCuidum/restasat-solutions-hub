@@ -61,17 +61,20 @@ const ProductDetail = () => {
             <span className="text-sm text-muted-foreground">/ mes</span>
           </div>
 
-          {product.specs && (
+          {product.features && product.features.length > 0 && (
             <div className="mb-8">
-              <h3 className="font-semibold mb-3 text-sm uppercase tracking-wider">Características</h3>
-              <dl className="grid grid-cols-2 gap-3">
-                {product.specs.map((s) => (
-                  <div key={s.label} className="bg-surface rounded-lg p-3">
-                    <dt className="text-xs text-muted-foreground">{s.label}</dt>
-                    <dd className="text-sm font-semibold mt-0.5">{s.value}</dd>
-                  </div>
+              <h3 className="font-semibold mb-3 text-sm uppercase tracking-wider flex items-center gap-2">
+                <Sparkles className="h-4 w-4 text-accent" />
+                Lo más destacado
+              </h3>
+              <ul className="grid sm:grid-cols-2 gap-2 text-sm">
+                {product.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2 bg-surface rounded-lg px-3 py-2">
+                    <Check className="h-4 w-4 text-accent shrink-0 mt-0.5" />
+                    <span>{f}</span>
+                  </li>
                 ))}
-              </dl>
+              </ul>
             </div>
           )}
 
@@ -96,6 +99,80 @@ const ProductDetail = () => {
           </div>
         </div>
       </section>
+
+      {/* FICHA TÉCNICA */}
+      {product.specSheet && product.specSheet.length > 0 && (
+        <section className="bg-surface border-y border-border">
+          <div className="container-x py-16">
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+              <div>
+                <span className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                  <FileText className="h-3.5 w-3.5" />
+                  Ficha técnica
+                </span>
+                <h2 className="text-3xl font-bold mt-2">Especificaciones</h2>
+                <p className="text-muted-foreground text-sm mt-1">
+                  Datos verificados por el fabricante · {product.brand}
+                </p>
+              </div>
+              <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                <Tag className="h-3.5 w-3.5" />
+                Ref. {product.id.toUpperCase()}
+              </div>
+            </div>
+
+            <div className="grid lg:grid-cols-3 gap-6">
+              {product.specSheet.map((group) => (
+                <div
+                  key={group.title}
+                  className="bg-card border border-border rounded-2xl overflow-hidden"
+                >
+                  <div className="bg-primary text-primary-foreground px-5 py-3">
+                    <h3 className="text-sm font-bold uppercase tracking-wider">
+                      {group.title}
+                    </h3>
+                  </div>
+                  <dl className="divide-y divide-border">
+                    {group.items.map((item) => (
+                      <div
+                        key={item.label}
+                        className="flex items-center justify-between gap-4 px-5 py-3"
+                      >
+                        <dt className="text-sm text-muted-foreground">{item.label}</dt>
+                        <dd className="text-sm font-semibold text-right">{item.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              ))}
+            </div>
+
+            {product.documents && product.documents.length > 0 && (
+              <div className="mt-10 grid sm:grid-cols-2 gap-3 max-w-2xl">
+                {product.documents.map((doc) => (
+                  <a
+                    key={doc.label}
+                    href="#"
+                    onClick={(e) => e.preventDefault()}
+                    className="group flex items-center gap-3 bg-card border border-border rounded-xl px-4 py-3 hover:border-accent transition-colors"
+                  >
+                    <div className="h-10 w-10 rounded-lg bg-accent/15 flex items-center justify-center shrink-0">
+                      <FileText className="h-5 w-5 text-accent" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold truncate">{doc.label}</div>
+                      {doc.size && (
+                        <div className="text-xs text-muted-foreground">PDF · {doc.size}</div>
+                      )}
+                    </div>
+                    <Download className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       <section className="bg-surface py-12">
         <div className="container-x grid md:grid-cols-3 gap-6">
