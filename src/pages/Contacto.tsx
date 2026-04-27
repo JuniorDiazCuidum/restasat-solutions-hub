@@ -131,25 +131,35 @@ const Contacto = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border bg-primary text-primary-foreground">
-        {/* Decorative gradients */}
+      {/* HERO - dark with grid mesh + conic glow */}
+      <section className="relative overflow-hidden border-b border-border bg-foreground text-background">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-accent/20 blur-3xl" />
-          <div className="absolute -bottom-40 -right-20 h-[500px] w-[500px] rounded-full bg-accent/10 blur-3xl" />
+          {/* Conic warm glow */}
           <div
-            className="absolute inset-0 opacity-[0.07]"
+            className="absolute inset-0 opacity-60"
             style={{
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
-              backgroundSize: "32px 32px",
+              background:
+                "conic-gradient(from 220deg at 80% 20%, hsl(var(--accent) / 0.35), transparent 35%, hsl(var(--primary) / 0.4) 70%, transparent)",
             }}
           />
+          {/* Grid mesh */}
+          <div
+            className="absolute inset-0 opacity-[0.08]"
+            style={{
+              backgroundImage:
+                "linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+              maskImage:
+                "radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent)",
+            }}
+          />
+          {/* Soft accent blob */}
+          <div className="absolute -bottom-40 left-1/3 h-[420px] w-[420px] rounded-full bg-accent/15 blur-3xl" />
         </div>
 
         <div className="container-x relative py-20 md:py-28">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/10 border border-background/20 backdrop-blur-sm mb-6">
               <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
               <span className="text-xs font-medium tracking-wide">Disponibles ahora · Respuesta en 24h</span>
             </div>
@@ -173,7 +183,7 @@ const Contacto = () => {
                 </svg>
               </span>
             </h1>
-            <p className="text-primary-foreground/80 text-lg max-w-2xl leading-relaxed">
+            <p className="text-background/75 text-lg max-w-2xl leading-relaxed">
               Cuéntanos qué necesitas y te haremos un presupuesto a medida sin compromiso.
               15 años equipando cocinas profesionales en toda España.
             </p>
@@ -187,7 +197,7 @@ const Contacto = () => {
               ].map((s) => (
                 <div key={s.label}>
                   <div className="text-3xl md:text-4xl font-bold text-accent">{s.value}</div>
-                  <div className="text-xs uppercase tracking-wider text-primary-foreground/60 mt-1">
+                  <div className="text-xs uppercase tracking-wider text-background/60 mt-1">
                     {s.label}
                   </div>
                 </div>

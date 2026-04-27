@@ -31,26 +31,31 @@ const Blog = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border bg-primary text-primary-foreground">
+      {/* HERO - light editorial paper */}
+      <section className="relative overflow-hidden border-b border-border bg-surface text-foreground">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-accent/20 blur-3xl" />
-          <div className="absolute -bottom-40 -right-20 h-[500px] w-[500px] rounded-full bg-accent/10 blur-3xl" />
+          {/* Soft warm wash */}
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-primary/5" />
+          {/* Diagonal lines pattern */}
           <div
-            className="absolute inset-0 opacity-[0.07]"
+            className="absolute inset-0 opacity-[0.06]"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
-              backgroundSize: "32px 32px",
+                "repeating-linear-gradient(45deg, hsl(var(--foreground)) 0 1px, transparent 1px 14px)",
             }}
           />
+          {/* Accent blobs */}
+          <div className="absolute -top-32 right-10 h-[420px] w-[420px] rounded-full bg-accent/15 blur-3xl" />
+          <div className="absolute bottom-0 -left-20 h-[360px] w-[360px] rounded-full bg-primary/10 blur-3xl" />
+          {/* Bottom fade into page */}
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-b from-transparent to-background" />
         </div>
 
         <div className="container-x relative py-20 md:py-28">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border shadow-sm mb-6">
               <BookOpen className="h-3.5 w-3.5 text-accent" />
-              <span className="text-xs font-medium tracking-wide">
+              <span className="text-xs font-medium tracking-wide text-foreground">
                 {posts.length} artículos · Actualizado este mes
               </span>
             </div>
@@ -74,7 +79,7 @@ const Blog = () => {
                 </svg>
               </span>
             </h1>
-            <p className="text-primary-foreground/80 text-lg max-w-2xl leading-relaxed">
+            <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
               Guías, tendencias y consejos prácticos para sacar el máximo partido a tu cocina
               profesional. Escrito por nuestro equipo técnico.
             </p>
