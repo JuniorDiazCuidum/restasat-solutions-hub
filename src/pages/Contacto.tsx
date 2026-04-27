@@ -159,7 +159,7 @@ const Contacto = () => {
 
         <div className="container-x relative py-20 md:py-28">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/10 border border-background/20 backdrop-blur-sm mb-6">
               <span className="h-2 w-2 rounded-full bg-accent animate-pulse" />
               <span className="text-xs font-medium tracking-wide">Disponibles ahora · Respuesta en 24h</span>
             </div>
@@ -183,7 +183,7 @@ const Contacto = () => {
                 </svg>
               </span>
             </h1>
-            <p className="text-primary-foreground/80 text-lg max-w-2xl leading-relaxed">
+            <p className="text-background/75 text-lg max-w-2xl leading-relaxed">
               Cuéntanos qué necesitas y te haremos un presupuesto a medida sin compromiso.
               15 años equipando cocinas profesionales en toda España.
             </p>
@@ -197,7 +197,7 @@ const Contacto = () => {
               ].map((s) => (
                 <div key={s.label}>
                   <div className="text-3xl md:text-4xl font-bold text-accent">{s.value}</div>
-                  <div className="text-xs uppercase tracking-wider text-primary-foreground/60 mt-1">
+                  <div className="text-xs uppercase tracking-wider text-background/60 mt-1">
                     {s.label}
                   </div>
                 </div>
