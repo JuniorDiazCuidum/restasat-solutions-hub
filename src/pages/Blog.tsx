@@ -53,9 +53,9 @@ const Blog = () => {
 
         <div className="container-x relative py-20 md:py-28">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 backdrop-blur-sm mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-card border border-border shadow-sm mb-6">
               <BookOpen className="h-3.5 w-3.5 text-accent" />
-              <span className="text-xs font-medium tracking-wide">
+              <span className="text-xs font-medium tracking-wide text-foreground">
                 {posts.length} artículos · Actualizado este mes
               </span>
             </div>
@@ -79,7 +79,7 @@ const Blog = () => {
                 </svg>
               </span>
             </h1>
-            <p className="text-primary-foreground/80 text-lg max-w-2xl leading-relaxed">
+            <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
               Guías, tendencias y consejos prácticos para sacar el máximo partido a tu cocina
               profesional. Escrito por nuestro equipo técnico.
             </p>
