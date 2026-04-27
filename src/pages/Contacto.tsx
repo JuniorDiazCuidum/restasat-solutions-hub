@@ -131,20 +131,30 @@ const Contacto = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden border-b border-border bg-primary text-primary-foreground">
-        {/* Decorative gradients */}
+      {/* HERO - dark with grid mesh + conic glow */}
+      <section className="relative overflow-hidden border-b border-border bg-foreground text-background">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-accent/20 blur-3xl" />
-          <div className="absolute -bottom-40 -right-20 h-[500px] w-[500px] rounded-full bg-accent/10 blur-3xl" />
+          {/* Conic warm glow */}
           <div
-            className="absolute inset-0 opacity-[0.07]"
+            className="absolute inset-0 opacity-60"
             style={{
-              backgroundImage:
-                "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
-              backgroundSize: "32px 32px",
+              background:
+                "conic-gradient(from 220deg at 80% 20%, hsl(var(--accent) / 0.35), transparent 35%, hsl(var(--primary) / 0.4) 70%, transparent)",
             }}
           />
+          {/* Grid mesh */}
+          <div
+            className="absolute inset-0 opacity-[0.08]"
+            style={{
+              backgroundImage:
+                "linear-gradient(currentColor 1px, transparent 1px), linear-gradient(90deg, currentColor 1px, transparent 1px)",
+              backgroundSize: "48px 48px",
+              maskImage:
+                "radial-gradient(ellipse 80% 60% at 50% 40%, black, transparent)",
+            }}
+          />
+          {/* Soft accent blob */}
+          <div className="absolute -bottom-40 left-1/3 h-[420px] w-[420px] rounded-full bg-accent/15 blur-3xl" />
         </div>
 
         <div className="container-x relative py-20 md:py-28">
