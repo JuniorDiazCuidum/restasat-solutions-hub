@@ -13,6 +13,14 @@ import {
   Download,
   Sparkles,
   Tag,
+  Zap,
+  Ruler,
+  Settings2,
+  Snowflake,
+  Wind,
+  Droplets,
+  Calendar,
+  Printer,
 } from "lucide-react";
 import { ProductCard } from "@/components/ProductCard";
 
